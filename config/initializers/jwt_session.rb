@@ -1,2 +1,2 @@
 JWTSessions.algorithm = "HS256"
-JWTSessions.encryption_key = Rails.application.secrets.secret_jwt_encryption_key
+JWTSessions.encryption_key = "6fe30b3551b82641fc91f58a4bc49f0914fe975cc07e877c4e6c830303d1c67a5c58826bd876127fd9a02993741c05ea21037cb83cf1ac59dbb476405a660862"
