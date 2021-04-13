@@ -6,4 +6,8 @@ Rails.application.routes.draw do
     post '/login', to: 'sessions#create'
     delete '/logout', to: 'sessions#destroy'
   end
+
+  namespace :company do 
+    get '/customers/new', to: 'customers#create'
+  end
 end
