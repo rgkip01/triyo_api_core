@@ -8,6 +8,6 @@ Rails.application.routes.draw do
   end
 
   namespace :company do 
-    get '/customers/new', to: 'customers#create'
+    post '/customers/new', to: 'customers#create'
   end
 end
