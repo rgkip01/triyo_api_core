@@ -9,5 +9,7 @@ Rails.application.routes.draw do
 
   namespace :company do 
     post '/customers/new', to: 'customers#create'
+    get '/customers/list', to: 'customers#index'
+    get '/customers/:id/details', to: 'customers#details'
   end
 end
