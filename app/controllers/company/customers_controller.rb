@@ -1,6 +1,8 @@
 class Company::CustomersController < ApplicationController
-  before_action :authorize_access_request!, only: [:index, :create, :details]
-  before_action :set_customer, only: [:details]
+  before_action :authorize_access_request!,
+   only: [:index, :create, :details, :destroy]
+  before_action :set_customer,
+   only: [:details, :update, :destroy]
 
   def index
     @customers = Customer.all.order(created_at: :desc)
@@ -33,7 +35,39 @@ class Company::CustomersController < ApplicationController
   def details
     render json: @customer ||= {}, status: :ok
   end
+
+  def update
+    if @customer
+      @customer.update!(customer_params)
+
+      render json: {
+        message: "Atualizado com sucesso!"
+      }, 
+      status: :ok
+    else
+      render json: {
+        message: "Cliente não atualizado!"
+      }, 
+      status: :unprocessable_entity
+    end
+  end
   
+  def destroy
+    if @customer
+      @customer.destroy! 
+  
+      render json: {
+        message: "Excluído com sucesso!"
+      },
+      status: :ok
+    else
+      render json: {
+        message: "Não encontrado!"
+      },
+      status: :ok
+    end
+  end
+
   private
   
   def check_customer

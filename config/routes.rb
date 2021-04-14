@@ -11,5 +11,7 @@ Rails.application.routes.draw do
     post '/customers/new', to: 'customers#create'
     get '/customers/list', to: 'customers#index'
     get '/customers/:id/details', to: 'customers#details'
+    put '/customers/:id/update', to: 'customers#update'
+    delete '/customers/:id/delete', to: 'customers#destroy'
   end
 end
