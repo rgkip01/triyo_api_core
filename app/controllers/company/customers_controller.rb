@@ -79,13 +79,15 @@ class Company::CustomersController < ApplicationController
   end
   
   def customer_params
-    params.require(:customer)
-      .permit(
-        :customer_name,
-        :document,
-        :customer_type,
-        :email,
-        :phone
-      )
+    params.require(
+      :customer
+    )
+    .permit(
+      :customer_name,
+      :document,
+      :customer_type,
+      :email,
+      :phone
+    )
   end
 end

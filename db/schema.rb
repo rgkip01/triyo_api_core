@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_12_172636) do
+ActiveRecord::Schema.define(version: 2021_04_15_065010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,6 +26,21 @@ ActiveRecord::Schema.define(version: 2021_04_12_172636) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "order_of_services", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "os_number"
+    t.string "reason_called"
+    t.text "message"
+    t.string "place_of_performance"
+    t.datetime "start_date_os"
+    t.datetime "end_date_os"
+    t.uuid "user_id", null: false
+    t.uuid "customer_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_order_of_services_on_customer_id"
+    t.index ["user_id"], name: "index_order_of_services_on_user_id"
+  end
+
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -33,4 +48,6 @@ ActiveRecord::Schema.define(version: 2021_04_12_172636) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "order_of_services", "customers"
+  add_foreign_key "order_of_services", "users"
 end
